@@ -1,23 +1,24 @@
 import asyncio
 import time
-
-def write(msg):
-    print(msg, flush=True)
+import sys
 
 async def say1():
     await asyncio.sleep(1)
-    write("Hello 1!")
+    print ("Hello 1!", time.time()-t0)
+    sys.stdout.flush()
 
 async def say2():
     await asyncio.sleep(1)
-    write("Hello 2!")
+    print ("Hello 2!", time.time()-t0)
+    sys.stdout.flush()
 
-write("start")
+print ("start")
 loop = asyncio.get_event_loop()
+t0 = time.time()
 loop.run_until_complete(asyncio.gather(
     say1(),
     say2()
 ))
-write("exit")
+print ("done")
 
 loop.close()
