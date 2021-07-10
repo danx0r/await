@@ -8,11 +8,11 @@ async def task_func():
 
 
 async def main(loop):
-    print('creating task')
-    task = asyncio.create_task(task_func())
-    print('waiting for {!r}'.format(task))
-    return_value = await task
-    print('task completed {!r}'.format(task))
+#    print('creating task')
+#    task = asyncio.create_task(task_func())
+#    print('waiting for {!r}'.format(task))
+    return_value = await task_func()
+#    print('task completed {!r}'.format(task))
     print('return value: {!r}'.format(return_value))
 
 
