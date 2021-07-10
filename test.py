@@ -1,24 +1,24 @@
 import asyncio
-import time
-import sys
 
-async def say1():
-    await asyncio.sleep(1)
-    print ("Hello 1!", time.time()-t0)
-    sys.stdout.flush()
 
-async def say2():
-    await asyncio.sleep(1)
-    print ("Hello 2!", time.time()-t0)
-    sys.stdout.flush()
+async def task_func():
+    print('in task_func')
+    await asyncio.sleep(3)
+    return 'the result'
 
-print ("start")
-loop = asyncio.get_event_loop()
-t0 = time.time()
-loop.run_until_complete(asyncio.gather(
-    say1(),
-    say2()
-))
-print ("done")
 
-loop.close()
+async def main(loop):
+    print('creating task')
+    task = asyncio.create_task(task_func())
+    print('waiting for {!r}'.format(task))
+    return_value = await task
+    print('task completed {!r}'.format(task))
+    print('return value: {!r}'.format(return_value))
+
+
+event_loop = asyncio.get_event_loop()
+try:
+    event_loop.run_until_complete(main(event_loop))
+finally:
+    event_loop.close()
+
